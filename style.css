@@ -1,0 +1,202 @@
+/* Base Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #d32f2f;
+    color: #fff;
+    padding: 10px 0;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+header .logo img {
+    height: 50px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Main Content */
+.main-content {
+    display: flex;
+    margin: 20px;
+}
+
+.article {
+    flex: 3;
+    background-color: #fff;
+    padding: 20px;
+    margin-right: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.sidebar {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+}
+
+/* News Section */
+.news {
+    text-align: center;
+    padding: 20px;
+}
+
+/* News Grid Layout */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* News Card Styling */
+.news-card {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    overflow: hidden;
+    width: 100%; /* Or a fixed width like max-width: 350px; */
+}
+
+/* Image Styling - Ensures Images Fit Correctly */
+.news-card img {
+    width: 100%; /* Makes sure image fills the width */
+    height: 250px; /* Sets a fixed height for consistency */
+    object-fit: cover; /* Ensures the image fits without stretching */
+    border-radius: 8px; /* Keeps images looking smooth */
+}
+
+
+/* Make the entire news section responsive */
+.news {
+    width: 90%; /* Keeps the section responsive */
+    max-width: 1200px; /* Prevents it from becoming too wide on large screens */
+    margin: 0 auto; /* Centers the section */
+    padding: 20px;
+    text-align: center;
+}
+
+/* Style the refresh button */
+#refresh-posts {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#refresh-posts:hover {
+    background-color: #218838;
+}
+
+/* Make the news grid responsive */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusts to screen size */
+    gap: 20px; /* Spacing between news cards */
+    padding-top: 20px;
+}
+
+/* Style individual news cards */
+.news-card {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    width: 100%; /* Or a fixed width like max-width: 350px; */
+}
+
+.news-card:hover {
+    transform: scale(1.02); /* Adds a slight zoom effect on hover */
+}
+
+/* Ensure images fit within their containers */
+.news-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .news {
+        width: 95%;
+    }
+
+    .news-grid {
+        grid-template-columns: 1fr; /* Single column on small screens */
+    }
+
+    #refresh-posts {
+        width: 100%; /* Button takes full width on mobile */
+    }
+}

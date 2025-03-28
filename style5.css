@@ -1,0 +1,29 @@
+.media-services {
+    width: 80%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.media-services .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 4 columns per row */
+    gap: 20px; /* Space between items */
+    justify-content: center;
+}
+
+.media-services .service {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px #060ae2ec;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+   

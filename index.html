@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Team | Gyankoba Television</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="1.jpg" alt="Media Team Logo">
+            </div>
+            <div class="tv-name"><h2>Gyankoba Television</h2></div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Gyankoba Television</h1>
+            <p>Delivering the latest and most engaging news, documentaries, and media content.</p>
+            <a href="#latest-news" class="btn">Explore Now</a>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <section class="news" id="latest-news">
+        <h2>Latest News</h2>
+        <button id="refresh-posts">Refresh Posts</button>
+        <div id="news-container" class="news-grid"></div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter">
+        <h2>Subscribe to Our Newsletter</h2>
+        <form>
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>© 2025 Gyankoba TV. All Rights Reserved. | <a href="#">Privacy Policy</a></p>
+        <div class="social-media">
+            <a href="https://www.facebook.com/gyankobatv"><img src="2.jpg" alt="Facebook"></a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
+        // Fetch posts from the database
+        async function fetchPosts() {
+            const newsContainer = document.getElementById('news-container');
+            newsContainer.innerHTML = "<p>Loading...</p>";  // Show loading message initially
+
+            try {
+                const response = await fetch('fetch_post.php');  // Fetch from your PHP endpoint
+                const posts = await response.json();
+
+                if (posts.message) {
+                    // Handle error response from the PHP script (if there's an error message)
+                    newsContainer.innerHTML = `<p>Error: ${posts.message}</p>`;
+                } else if (!posts || posts.length === 0) {
+                    // If no posts are returned
+                    newsContainer.innerHTML = "<p>No posts available.</p>";
+                } else {
+                    newsContainer.innerHTML = '';  // Clear the loading message
+
+                    posts.forEach(post => {
+                        const postElement = document.createElement('div');
+                        postElement.classList.add('news-card');
+
+                        let imageTag = post.image
+                            ? `<img src="${post.image}" alt="${post.title}" style="width: 100%; max-height: 200px; object-fit: cover;">`
+                            : '';
+
+                        // Construct the HTML for each post
+                        postElement.innerHTML = `
+                            <h3>${post.title}</h3>
+                            <p><strong>${new Date(post.created_at).toLocaleDateString()}</strong></p>
+                            ${imageTag}
+                            <p>${post.content}</p>
+                        `;
+                        
+                        // Add post to the container
+                        newsContainer.appendChild(postElement);
+                    });
+                }
+            } catch (error) {
+                console.error('Error fetching posts:', error);
+                newsContainer.innerHTML = "<p>Error loading posts.</p>";
+            }
+        }
+
+        // Fetch posts when the page loads
+        document.addEventListener("DOMContentLoaded", fetchPosts);
+
+        // Refresh posts when the "Refresh Posts" button is clicked
+        document.getElementById("refresh-posts").addEventListener("click", fetchPosts);
+    </script>
+
+    <script>
+    async function fetchPosts() {
+        let response = await fetch("fetch_post.php");
+        let posts = await response.json();
+
+        let container = document.getElementById("news-container");
+        container.innerHTML = "";
+
+        posts.forEach(post => {
+            let imageTag = post.image
+                ? `<img src="${post.image}" alt="Post Image" class="news-image">`
+                : '';
+
+            container.innerHTML += `
+                <div class="news-card">
+                    <h3>${post.title}</h3>
+                    <p><strong>${new Date(post.created_at).toLocaleDateString()}</strong></p>
+                    ${imageTag}
+                    <p>${post.content}</p>
+                </div>
+            `;
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", fetchPosts);
+    document.getElementById("refresh-posts").addEventListener("click", fetchPosts);
+</script>
+
+</body>
+
+</html>
